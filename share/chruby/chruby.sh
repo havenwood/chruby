@@ -1,5 +1,6 @@
-typeset -a RUBIES
+CHRUBY_VERSION="0.3.2"
 
+RUBIES=()
 [[ -d /opt/rubies/    ]] && RUBIES+=(/opt/rubies/*)
 [[ -d "$HOME/.rubies" ]] && RUBIES+=("$HOME"/.rubies/*)
 
@@ -54,6 +55,9 @@ function chruby()
 	case "$1" in
 		-h|--help)
 			echo "usage: chruby [RUBY|VERSION|system] [RUBY_OPTS]"
+			;;
+		-v|--version)
+			echo "chruby version $CHRUBY_VERSION"
 			;;
 		"")
 			local star
