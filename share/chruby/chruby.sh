@@ -1,4 +1,4 @@
-CHRUBY_VERSION="0.3.2"
+CHRUBY_VERSION="0.3.3"
 
 RUBIES=()
 [[ -d /opt/rubies/    ]] && RUBIES+=(/opt/rubies/*)
@@ -13,7 +13,12 @@ function chruby_reset()
 	if [[ ! $UID -eq 0 ]]; then
 		export PATH=${PATH//:$GEM_HOME\/bin:/:}
 		export PATH=${PATH//:$GEM_ROOT\/bin:/:}
-		unset GEM_ROOT GEM_HOME GEM_PATH
+
+		export GEM_PATH=":$GEM_PATH:"
+		export GEM_PATH=${GEM_PATH//:$GEM_HOME:/:}
+		export GEM_PATH=${GEM_PATH//:$GEM_ROOT:/:}
+		export GEM_PATH=${GEM_PATH#:}; export GEM_PATH=${GEM_PATH%:}
+		unset GEM_ROOT GEM_HOME
 	fi
 
 	export PATH=${PATH#:}; export PATH=${PATH%:}
@@ -34,7 +39,7 @@ function chruby_use()
 	export RUBYOPT="$2"
 	export PATH="$RUBY_ROOT/bin:$PATH"
 
-	eval `ruby - <<EOF
+	eval `$RUBY_ROOT/bin/ruby - <<EOF
 require 'rubygems'
 puts "export RUBY_ENGINE=#{defined?(RUBY_ENGINE) ? RUBY_ENGINE : 'ruby'};"
 puts "export RUBY_VERSION=#{RUBY_VERSION};"

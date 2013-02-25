@@ -1,3 +1,5 @@
+unset RUBY_VERSION_FILE
+
 function chruby_auto() {
 	local dir="$PWD"
 	local version_file
@@ -26,9 +28,12 @@ if [[ -n "$ZSH_VERSION" ]]; then
 	if [[ ! "$precmd_functions" == *chruby_auto* ]]; then
 		precmd_functions+=("chruby_auto")
 	fi
-else
+elif [[ -n "$BASH_VERSION" ]]; then
+	PROMPT_COMMAND="${PROMPT_COMMAND%% }"
+
 	if [[ -n "$PROMPT_COMMAND" ]]; then
 		if [[ ! "$PROMPT_COMMAND" == *chruby_auto* ]]; then
+			PROMPT_COMMAND="${PROMPT_COMMAND%%;}"
 			PROMPT_COMMAND="$PROMPT_COMMAND; chruby_auto"
 		fi
 	else

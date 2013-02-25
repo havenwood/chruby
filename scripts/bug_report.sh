@@ -1,4 +1,8 @@
-#!/bin/sh -il
+#
+# chruby script to collect environment information for bug reports.
+#
+
+[[ -z "$PS1" ]] && exec $SHELL -i -l $0
 
 function print_section()
 {
@@ -21,7 +25,7 @@ function print_variable()
 
 function print_version()
 {
-	if [[ -n $(which $1) ]]; then
+	if [[ -n $(which $1 2>/dev/null) ]]; then
 		indent "$($1 --version | head -n 1) ($(which $1))"
 	fi
 }
@@ -38,13 +42,16 @@ print_section "Environment"
 
 print_variable "SHELL"
 print_variable "PATH"
-[[ -n "$PROMPT_COMMAND" ]] && print_variable "PROMPT_COMMAND"
+
+[[ -n "$PROMPT_COMMAND"    ]] && print_variable "PROMPT_COMMAND"
+[[ -n "$preexec_functions" ]] && print_variable "preexec_functions"
+[[ -n "$precmd_functions"  ]] && print_variable "precmd_functions"
 
 [[ -n "$RUBIES"       ]] && print_variable "RUBIES" "(${RUBIES[*]})"
-[[ -n "$FUBY_ROOT"    ]] && print_variable "RUBY_ROOT"
+[[ -n "$RUBY_ROOT"    ]] && print_variable "RUBY_ROOT"
 [[ -n "$RUBY_VERSION" ]] && print_variable "RUBY_VERSION"
 [[ -n "$RUBY_ENGINE"  ]] && print_variable "RUBY_ENGINE"
-[[ -n "$GEM_ROOT"     ]] && print_variable "GEM_HOME"
+[[ -n "$GEM_ROOT"     ]] && print_variable "GEM_ROOT"
 [[ -n "$GEM_HOME"     ]] && print_variable "GEM_HOME"
 [[ -n "$GEM_PATH"     ]] && print_variable "GEM_PATH"
 

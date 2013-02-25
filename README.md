@@ -17,7 +17,7 @@ Changes the current Ruby.
 * Defaults to the system Ruby.
 * Optionally supports auto-switching and the `.ruby-version` file.
 * Supports [bash] and [zsh].
-* Small (~80 LOC).
+* Small (~90 LOC).
 * Has tests.
 
 ## Anti-Features
@@ -30,9 +30,9 @@ Changes the current Ruby.
 
 ## Install
 
-    wget -O chruby-0.3.2.tar.gz https://github.com/postmodern/chruby/archive/v0.3.2.tar.gz
-    tar -xzvf chruby-0.3.2.tar.gz
-    cd chruby-0.3.2/
+    wget -O chruby-0.3.3.tar.gz https://github.com/postmodern/chruby/archive/v0.3.3.tar.gz
+    tar -xzvf chruby-0.3.3.tar.gz
+    cd chruby-0.3.3/
     make install
 
 ### PGP
@@ -41,8 +41,8 @@ All releases are [PGP] signed for security. Instructions on how to import my
 PGP key can be found on my [blog][1]. To verify that a release was not tampered 
 with:
 
-    wget https://raw.github.com/postmodern/chruby/master/pkg/chruby-0.3.2.tar.gz.asc
-    gpg --verify chruby-0.3.2.tar.gz.asc chruby-0.3.2.tar.gz
+    wget https://raw.github.com/postmodern/chruby/master/pkg/chruby-0.3.3.tar.gz.asc
+    gpg --verify chruby-0.3.3.tar.gz.asc chruby-0.3.3.tar.gz
 
 ### setup.sh
 
@@ -62,7 +62,7 @@ chruby can also be installed with [homebrew]:
 
 chruby is already included in the [AUR](https://aur.archlinux.org/):
 
-    yaourt -S devel/chruby
+    yaourt -S chruby
 
 ### Rubies
 
@@ -142,7 +142,7 @@ For instructions on using chruby with other tools, please see the [wiki]:
 List available Rubies:
 
     $ chruby
-       ruby-1.9.3-p327
+       ruby-1.9.3-p392
        jruby-1.7.0
        rubinius-2.0.0-rc1
 
@@ -150,24 +150,24 @@ Select a Ruby:
 
     $ chruby 1.9.3
     $ chruby
-     * ruby-1.9.3-p327
+     * ruby-1.9.3-p392
        jruby-1.7.0
        rubinius-2.0.0-rc1
     $ echo $PATH
-    /home/hal/.gem/ruby/1.9.3/bin:/opt/rubies/ruby-1.9.3-p327/lib/ruby/gems/1.9.1/bin:/opt/rubies/ruby-1.9.3-p327/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/home/hal/bin:/home/hal/bin
+    /home/hal/.gem/ruby/1.9.3/bin:/opt/rubies/ruby-1.9.3-p392/lib/ruby/gems/1.9.1/bin:/opt/rubies/ruby-1.9.3-p392/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/home/hal/bin:/home/hal/bin
     $ gem env
     RubyGems Environment:
       - RUBYGEMS VERSION: 1.8.23
-      - RUBY VERSION: 1.9.3 (2012-11-10 patchlevel 327) [x86_64-linux]
+      - RUBY VERSION: 1.9.3 (2013-02-06 patchlevel 385) [x86_64-linux]
       - INSTALLATION DIRECTORY: /home/hal/.gem/ruby/1.9.3
-      - RUBY EXECUTABLE: /opt/rubies/ruby-1.9.3-p327/bin/ruby
+      - RUBY EXECUTABLE: /opt/rubies/ruby-1.9.3-p392/bin/ruby
       - EXECUTABLE DIRECTORY: /home/hal/.gem/ruby/1.9.3/bin
       - RUBYGEMS PLATFORMS:
         - ruby
         - x86_64-linux
       - GEM PATHS:
          - /home/hal/.gem/ruby/1.9.3
-         - /opt/rubies/ruby-1.9.3-p327/lib/ruby/gems/1.9.1
+         - /opt/rubies/ruby-1.9.3-p392/lib/ruby/gems/1.9.1
       - GEM CONFIGURATION:
          - :update_sources => true
          - :verbose => true
@@ -222,6 +222,11 @@ Switch to an arbitrary Ruby on the fly:
 > work.
 
 -- [Steve Klabnik](http://blog.steveklabnik.com/posts/2012-12-13-getting-started-with-chruby)
+
+> I wrote ruby-version; however, chruby is already what ruby-version wanted to
+> be. I've deprecated ruby-version in favor of chruby.
+
+-- [Wil Moore III](https://github.com/wilmoore)
 
 ## Credits
 
