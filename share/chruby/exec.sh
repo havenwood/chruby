@@ -12,25 +12,25 @@ function chruby-exec()
 		*)
 			if [[ $# -eq 0 ]]; then
 				echo "chruby-exec: RUBY and COMMAND required" >&2
-				exit 1
+				return 1
 			fi
 
-			argv=()
+			ARGV=()
 
 			for arg in $@; do
 				shift
 
 				if [[ "$arg" == "--" ]]; then break
-				else                          argv+=($arg)
+				else                          ARGV+=($arg)
 				fi
 			done
 
 			if [[ $# -eq 0 ]]; then
 				echo "chruby-exec: COMMAND required" >&2
-				exit 1
+				return 1
 			fi
 
-			exec $SHELL -i -l -c "chruby $argv && $*"
+			chruby $ARGV && $*
 			;;
 	esac
 }
