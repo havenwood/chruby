@@ -105,6 +105,17 @@ Installing to `/opt/rubies`:
     ruby-build rbx-2.0.0-rc1 /opt/rubies/rubinius-2.0.0-rc1
     ruby-build maglev-1.0.0 /opt/rubies/maglev-1.0.0
 
+#### mrvm
+
+    You can also use [mrvm] (mini RVM) to install additional Rubies:
+
+    Installing to `~/.rvm/rubies`:
+
+        mrvm install 1.9.3-p392
+        mrvm install jruby-1.7.3
+        mrvm install rbx-2.0.0-rc1
+        mrvm install maglev-1.0.0
+
 ## Configuration
 
 Add the following to the `/etc/profile.d/chruby.sh`, `~/.bashrc` or
@@ -280,6 +291,7 @@ Switch to an arbitrary Ruby on the fly:
 [FreeBSD ports collection]: https://www.freshports.org/devel/chruby/
 [ruby-install]: https://github.com/postmodern/ruby-install#readme
 [ruby-build]: https://github.com/sstephenson/ruby-build#readme
+[mrvm]: https://rvm.io/workflow/chruby
 [.ruby-version]: https://gist.github.com/1912050
 
 [RVM]: https://rvm.io/
