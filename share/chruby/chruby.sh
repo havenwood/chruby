@@ -1,10 +1,5 @@
 CHRUBY_VERSION="0.3.8"
-RUBIES=()
-
-for dir in "$PREFIX/opt/rubies" "$HOME/.rubies"; do
-	[[ -d "$dir" && -n "$(ls -A "$dir")" ]] && RUBIES+=("$dir"/*)
-done
-unset dir
+RUBIES=($(find "$PREFIX/opt/rubies" "$HOME/.rubies" -d 1 -type d 2>/dev/null | sed "h; s/.*\///g; G; s/\n/ /" | sort -t. -k 1,1 -k 2,2n -k 3,3n | cut -d" " -f2))
 
 function chruby_reset()
 {
