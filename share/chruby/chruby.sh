@@ -2,7 +2,7 @@ CHRUBY_VERSION="0.3.8"
 RUBIES=($(find "$PREFIX/opt/rubies" "$HOME/.rubies" -type d -mindepth 1 -maxdepth 1 2>/dev/null |
 	sed "h; s/-/./g; s/.*\///g; G; s/\n/ /" |
 	sort -t. -k 1,1 -k 2,2n -k 3,3n -k 4,4n |
-	sed "s/[^\/]*//"))
+	cut -d" " -f2))
 
 function chruby_reset()
 {
