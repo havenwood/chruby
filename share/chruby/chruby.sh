@@ -78,14 +78,22 @@ function chruby()
 			;;
 		system) chruby_reset ;;
 		*)
-			local dir match
+			local dir ruby match perfect_match version_match
 			for dir in "${RUBIES[@]}"; do
 				dir="${dir%%/}"
-				case "${dir##*/}" in
-					"$1")	match="$dir" && break ;;
+				ruby="${dir##*/}"
+				case "$ruby" in
+					"$1")	perfect_match="$dir" && break ;;
 					*"$1"*)	match="$dir" ;;
 				esac
+				[[ "${ruby#*-}" == "${1#*-}"* ]] && version_match="$dir"
 			done
+
+			if [[ -n "$perfect_match" ]]; then
+				match="$perfect_match"
+			elif [[ -n "$version_match" ]]; then
+				match="$version_match"
+			fi
 
 			if [[ -z "$match" ]]; then
 				echo "chruby: unknown Ruby: $1" >&2
