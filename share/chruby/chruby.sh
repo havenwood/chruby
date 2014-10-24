@@ -84,7 +84,7 @@ function chruby()
 				ruby="${dir##*/}"
 				if [[ "$ruby" == "$1" ]]; then
 					match="$dir"
-				elif [[ "${ruby#*-}"* == "${1#*-}"* ]]; then
+				elif [[ "$1" == [0-9]* && "${ruby#*-}" == "${1#*-}"* ]]; then
 					version_match="$dir"
 				elif [[ "$ruby" == *"$1"* ]]; then
 					fuzzy_match="$dir"
